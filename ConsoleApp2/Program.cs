@@ -6,24 +6,20 @@ using iText.Layout.Element;
 
 class Program
 {
-    static void Main()
+    public static void Main()
     {
-        string pdfPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyPDF.pdf");
-
-        try
+        string pdfPath = "MyPDF.pdf";
+        using (PdfWriter writer = new PdfWriter(pdfPath))
         {
-            using (var writer = new PdfWriter(pdfPath))
-            using (var pdf = new PdfDocument(writer))
-            using (var document = new Document(pdf))
+            using (PdfDocument pdf = new PdfDocument(writer))
             {
-                document.Add(new Paragraph("Hello, World!"));
+                Document document = new Document(pdf);
+                document.Add(new Paragraph("Hello, Worldererere!"));
+                document.Close();
             }
-            Console.WriteLine("PDF generated successfully at: " + pdfPath);
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error: " + ex);
-        }
+
+        Console.WriteLine("PDF generated successfully using iText 7.");
     }
 }
 
